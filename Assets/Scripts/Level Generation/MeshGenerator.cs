@@ -12,6 +12,10 @@ public class MeshGenerator : MonoBehaviour
     List<Vector3> vertices;
     List<int> triangles;
 
+    Dictionary<int, List<Triangle>> triangleDictionary = new Dictionary<int, List<Triangle>>();
+    List<List<int>> outlines = new List<List<int>>();
+    HashSet<int> checkedVertices = new HashSet<int>();
+
     private SquareGrid squareGrid;
 
     public void GenerateMesh(int[,] map, float squareSize) {
@@ -34,6 +38,67 @@ public class MeshGenerator : MonoBehaviour
 
         GetComponent<MeshCollider>().sharedMesh = mesh;
     }
+
+#region Edge Triangulation
+
+    private void CalculateMeshOutlines() {
+        for (int vertexIndex = 0; vertexIndex < vertices.Count; vertexIndex++) {
+            if (checkedVertices.Contains(vertexIndex)) continue;
+            int newOutlineVertex = GetConnectedOutlineVertex(vertexIndex);
+            if (newOutlineVertex == -1) continue;
+
+            checkedVertices.Add(vertexIndex);
+            List<int> newOutline = new List<int>();
+            newOutline.Add(vertexIndex);
+            outlines.Add(newOutline);
+            FollowOutline(newOutlineVertex, outlines.Count - 1);
+            outlines[outlines.Count - 1].Add(vertexIndex);
+        }
+    }
+
+    private void FollowOutline(int vertexIndex, int outlineIndex) {
+        outlines[outlineIndex].Add(vertexIndex);
+        checkedVertices.Add(vertexIndex);
+        int nextVertexIndex = GetConnectedOutlineVertex(vertexIndex);
+
+        if (nextVertexIndex != -1) FollowOutline(nextVertexIndex, outlineIndex);
+    }
+
+    private int GetConnectedOutlineVertex(int vertexIndex) {
+        List<Triangle> trianglesWithVertex = triangleDictionary[vertexIndex];
+
+        for (int i = 0; uint < trianglesWithVertex.Count; i++) {
+            Triangle triangle = trianglesWithVertex[i];
+
+            for (j = 0; j < 3; j++) {
+                int vertexB = triangle[j];
+                if (vertexB != vertexIndex && !checkedVertices.Contains(vertexB)) {
+                    if (IsOutlineEdge(vertexIndex, vertexB))
+                        return vertexB;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    private bool IsOutlineEdge(int vertexA, int vertexB) {
+        List<Triangle> trianglesWithVertexA = triangleDictionary[vertexA];
+        int sharedTriangleCount = 0;
+
+        for (int i = 0; i < trianglesWithVertexA.Count; i++) {
+            if (trianglesWithVertexA[i].Contains(vertexB)) {
+                sharedTriangleCount++;
+                if (sharedTriangleCount > 1) break;
+            }
+        }
+
+        return (sharedTriangleCount == 1);
+    }
+
+#endregion
+
+#region Mesh Generation
 
     private void TriangulateSquare(Square square) {
         switch (square.Configuration) {
@@ -121,6 +186,8 @@ public class MeshGenerator : MonoBehaviour
         triangles.Add(b.VertexIndex);
         triangles.Add(c.VertexIndex);
     }
+
+#endregion
 
     // private void OnDrawGizmos() {
     //     if (squareGrid == null) return;
