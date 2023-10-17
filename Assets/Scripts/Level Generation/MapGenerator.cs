@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshGenerator))]
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] int width;
@@ -13,12 +14,18 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int smoothRecursions;
     int[,] map;
 
+    MeshGenerator meshGenerator;
+
     private void Start() {
+        meshGenerator = GetComponent<MeshGenerator>();
+
         GenerateMap();
         RandomFillMap();
 
         for (int i = 0; i < smoothRecursions; i++)
             SmoothMap();
+
+        meshGenerator.GenerateMesh(map, 1);
     }
 
     private void GenerateMap() {
@@ -53,7 +60,6 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-
     private int GetSurroundingWallCount(int gridX, int gridY) {
         int wallCount = 0;
         
@@ -70,15 +76,15 @@ public class MapGenerator : MonoBehaviour
         return wallCount;
     }
 
-    private void OnDrawGizmos() {
-        if (map != null) {
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    Gizmos.color = (map[x,y] == 1) ? Color.black : Color.white;
-                    Vector3 pos = new Vector3(-width/2 + x + 0.5f, 0, -height/2 + y + 0.5f);
-                    Gizmos.DrawCube(pos, Vector3.one);
-                }
-            }
-        }
-    }
+    // private void OnDrawGizmos() {
+    //     if (map != null) {
+    //         for (int x = 0; x < width; x++) {
+    //             for (int y = 0; y < height; y++) {
+    //                 Gizmos.color = (map[x,y] == 1) ? Color.black : Color.white;
+    //                 Vector3 pos = new Vector3(-width/2 + x + 0.5f, 0, -height/2 + y + 0.5f);
+    //                 Gizmos.DrawCube(pos, Vector3.one);
+    //             }
+    //         }
+    //     }
+    // }
 }
