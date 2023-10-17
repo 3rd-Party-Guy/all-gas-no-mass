@@ -320,4 +320,4 @@ MonoBehaviour:
   max_velocity: 750
   min_velocity: 0
   accelerationTime: 0.3
-  rotationMultiplier: 450
+  rotationMultiplier: 500

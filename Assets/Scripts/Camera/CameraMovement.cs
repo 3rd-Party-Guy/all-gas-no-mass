@@ -23,11 +23,6 @@ public class CameraMovement : MonoBehaviour
     float xMovementOffset, yMovementOffset = 0f;
     float xMovementOffsetVelocity, yMovementOffsetVelocity = 0f;
 
-    public void Start() {
-        if (target == null)
-            Debug.LogWarning("CameraMovement has no target");
-    }
-
     public void FixedUpdate() {
         if (target == null) return;
         HandleSmoothFollow();
