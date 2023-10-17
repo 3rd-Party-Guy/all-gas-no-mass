@@ -726,12 +726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018ed034e651b9747b1dd82886f7bbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 65
-  height: 42
-  randomFillPercent: 50
+  width: 120
+  height: 70
+  randomFillPercent: 45
   seed: 
   useRandomSeed: 1
-  smoothRecursions: 2
+  smoothRecursions: 1
 --- !u!4 &1754190258
 Transform:
   m_ObjectHideFlags: 0

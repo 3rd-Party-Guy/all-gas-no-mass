@@ -55,6 +55,7 @@ public class MapGenerator : MonoBehaviour
 
     private int GetSurroundingWallCount(int gridX, int gridY) {
         int wallCount = 0;
+        
         for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++) {
             for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++) {
                 if (neighbourX < 0 || neighbourX >= width || neighbourY < 0 || neighbourY >= height) {
