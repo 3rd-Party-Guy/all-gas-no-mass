@@ -53,18 +53,18 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+
     private int GetSurroundingWallCount(int gridX, int gridY) {
         int wallCount = 0;
         
-        for (int neighbourX = gridX - 1; neighbourX <= gridX + 1; neighbourX++) {
-            for (int neighbourY = gridY - 1; neighbourY <= gridY + 1; neighbourY++) {
-                if (neighbourX < 0 || neighbourX >= width || neighbourY < 0 || neighbourY >= height) {
-                    wallCount++;
-                    continue;
-                }
-                if (neighbourX == gridX || neighbourY == gridY) continue;
-                wallCount += map[neighbourX, neighbourY];
+        for (int x = gridX - 1; x <= gridX + 1; x++)
+        for (int y = gridY - 1; y <= gridY + 1; y++) {
+            if (x < 0 || x >= width || y < 0 || y >= height) {
+                wallCount++;
+                continue;
             }
+            if (x == gridX && y == gridY) continue;
+            wallCount += map[x, y];
         }
 
         return wallCount;

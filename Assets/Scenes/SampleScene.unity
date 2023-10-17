@@ -729,8 +729,8 @@ MonoBehaviour:
   width: 120
   height: 70
   randomFillPercent: 45
-  seed: 
-  useRandomSeed: 1
+  seed: nikolay
+  useRandomSeed: 0
   smoothRecursions: 1
 --- !u!4 &1754190258
 Transform:
