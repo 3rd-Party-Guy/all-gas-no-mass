@@ -730,12 +730,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018ed034e651b9747b1dd82886f7bbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 120
-  height: 70
-  randomFillPercent: 45
+  width: 450
+  height: 240
+  randomFillPercent: 40
   seed: nikolay
   useRandomSeed: 1
-  smoothRecursions: 2
+  smoothRecursions: 1
 --- !u!4 &1754190258
 Transform:
   m_ObjectHideFlags: 0
@@ -814,7 +814,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754190256}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d1fff6d144a1fe049a0357042f9c7a3e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

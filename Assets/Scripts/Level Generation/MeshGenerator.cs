@@ -67,10 +67,10 @@ public class MeshGenerator : MonoBehaviour
     private int GetConnectedOutlineVertex(int vertexIndex) {
         List<Triangle> trianglesWithVertex = triangleDictionary[vertexIndex];
 
-        for (int i = 0; uint < trianglesWithVertex.Count; i++) {
+        for (int i = 0; i < trianglesWithVertex.Count; i++) {
             Triangle triangle = trianglesWithVertex[i];
 
-            for (j = 0; j < 3; j++) {
+            for (int j = 0; j < 3; j++) {
                 int vertexB = triangle[j];
                 if (vertexB != vertexIndex && !checkedVertices.Contains(vertexB)) {
                     if (IsOutlineEdge(vertexIndex, vertexB))
