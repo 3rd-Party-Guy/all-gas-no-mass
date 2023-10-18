@@ -1,5 +1,5 @@
 public struct Triangle {
-    int vertexIndexA, vertexIndexB, vertexIndexC;
+    public readonly int vertexIndexA, vertexIndexB, vertexIndexC;
     int[] vertices;
 
     public Triangle(int a, int b, int c) {

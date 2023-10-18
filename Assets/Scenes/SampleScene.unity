@@ -706,11 +706,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1754190258}
-  - component: {fileID: 1754190257}
-  - component: {fileID: 1754190259}
   - component: {fileID: 1754190263}
   - component: {fileID: 1754190261}
-  - component: {fileID: 1754190262}
+  - component: {fileID: 1754190257}
+  - component: {fileID: 1754190259}
   m_Layer: 0
   m_Name: LevelGenerator
   m_TagString: LevelGenerator
@@ -730,12 +729,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 018ed034e651b9747b1dd82886f7bbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 450
-  height: 240
-  randomFillPercent: 40
+  width: 420
+  height: 360
+  randomFillPercent: 64
   seed: nikolay
   useRandomSeed: 1
-  smoothRecursions: 1
+  smoothRecursions: 2
 --- !u!4 &1754190258
 Transform:
   m_ObjectHideFlags: 0
@@ -807,28 +806,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1754190262
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1754190256}
-  m_Material: {fileID: 13400000, guid: d1fff6d144a1fe049a0357042f9c7a3e, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!33 &1754190263
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1319,6 +1296,10 @@ PrefabInstance:
     - target: {fileID: 3935996771687099316, guid: 9b6fad30bba89844ba0144bc25302409, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502044384457041306, guid: 9b6fad30bba89844ba0144bc25302409, type: 3}
+      propertyPath: movementBasedOffset
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

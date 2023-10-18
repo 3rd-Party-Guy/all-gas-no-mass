@@ -17,6 +17,7 @@ public class MeshGenerator : MonoBehaviour
     HashSet<int> checkedVertices = new HashSet<int>();
 
     private SquareGrid squareGrid;
+    MeshFilter walls;
 
     public void GenerateMesh(int[,] map, float squareSize) {
         squareGrid = new SquareGrid(map, squareSize);
@@ -36,10 +37,39 @@ public class MeshGenerator : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
 
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GenerateColliders();
     }
 
 #region Edge Triangulation
+    private void GenerateColliders() {
+        EdgeCollider2D[] curColliders = GetComponents<EdgeCollider2D>();
+        for (int i = 0; i < curColliders.Length; i++)
+            Destroy(curColliders[i]);
+
+        CalculateMeshOutlines();
+
+        foreach(List<int> outline in outlines) {
+            EdgeCollider2D edgeCollider = gameObject.AddComponent<EdgeCollider2D>();
+            Vector2[] edgePoints = new Vector2[outline.Count];
+            
+            for (int i = 0; i < outline.Count; i++) {
+                edgePoints[i] = new Vector2(vertices[outline[i]].x, vertices[outline[i]].y);
+            }
+
+            edgeCollider.points = edgePoints;
+        }
+    }
+
+    private void AddTriangleToDictionary(int vertexIndexKey, Triangle triangle) {
+        if (triangleDictionary.ContainsKey(vertexIndexKey)) {
+            triangleDictionary[vertexIndexKey].Add(triangle);
+        } else {
+            List<Triangle> triangleList = new List<Triangle>();
+            triangleList.Add(triangle);
+            triangleDictionary.Add(vertexIndexKey, triangleList);
+        }
+
+    }
 
     private void CalculateMeshOutlines() {
         for (int vertexIndex = 0; vertexIndex < vertices.Count; vertexIndex++) {
@@ -181,10 +211,16 @@ public class MeshGenerator : MonoBehaviour
         }
     }
 
+
     private void CreateTriangle(Node a, Node b, Node c) {
         triangles.Add(a.VertexIndex);
         triangles.Add(b.VertexIndex);
         triangles.Add(c.VertexIndex);
+
+        Triangle triangle = new Triangle(a.VertexIndex, b.VertexIndex, c.VertexIndex);
+        AddTriangleToDictionary(triangle.vertexIndexA, triangle);
+        AddTriangleToDictionary(triangle.vertexIndexB, triangle);
+        AddTriangleToDictionary(triangle.vertexIndexC, triangle);
     }
 
 #endregion

@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
         accelerationAction.Enable();
     }
 
-    public Vector2 GetMovementVector() {
+    public Vector2 GetInputVector() {
         return new Vector2(rotationAmount, acceleration);
     }
     
@@ -72,4 +72,7 @@ public class Movement : MonoBehaviour
         accelerationAction.Disable();
     }
 
+    public Vector2 MovementDirection {
+        get => transform.up;
+    }
 }
