@@ -36,7 +36,13 @@ public class UIController : MonoBehaviour
     }
 
     private void UpdateGameState(object e, EventArgs args) {
-        // TODO: Implement
+        GameStateType curGameState = GameController.Instance.GameState;
+
+        switch (curGameState) {
+        case GameStateType.GameOver:
+            StartCoroutine(FlashStatusChange("Try Again"));
+            break;
+        }
     }
 
     private void CompleteLevelUI(object e, EventArgs args) {

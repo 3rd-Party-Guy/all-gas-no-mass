@@ -9,6 +9,7 @@ TagManager:
   - LevelStart
   - MainUI
   - LevelGenerator
+  - PlayerBottom
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;
     GameObject player;
-    GameState gameState;
+    GameStateType gameState;
     Transform levelStart;
 
     public event EventHandler OnLevelComplete;
@@ -65,6 +65,11 @@ public class GameController : MonoBehaviour
         OnLevelComplete?.Invoke(this, EventArgs.Empty);
     }
 
+    public void GameOver() {
+        GameState = GameStateType.GameOver;
+        RespawnPlayer();
+    }
+
     private void OnEnable() {
         respawnPlayerAction.Enable();
     }
@@ -73,7 +78,7 @@ public class GameController : MonoBehaviour
         respawnPlayerAction.Disable();
     }
 
-    public GameState GameState {
+    public GameStateType GameState {
         get => gameState;
         private set {
             gameState = value;

@@ -26,14 +26,18 @@ public class Movement : MonoBehaviour
     Vector3 rotationVec = new Vector3();
     float acceleration = 0f;
 
+    ParticleSystem accelerationParticles;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        accelerationParticles = GetComponent<ParticleSystem>();
     }
 
     public void Update() {
         ReadInput();
         HandleAcceleration();
         HandleRotation();
+        HandleParticleSystem();
     }   
 
     private void ReadInput() {
@@ -66,7 +70,22 @@ public class Movement : MonoBehaviour
     public Vector2 GetInputVector() {
         return new Vector2(rotationAmount, acceleration);
     }
-    
+
+    private void HandleParticleSystem() {
+        Debug.Log("Current Acceleration: " + acceleration);
+        if (acceleration >= 0.1f) {
+            Debug.Log("SHOULD Play PS");
+            if (!accelerationParticles.isEmitting) {
+                Debug.Log("Play PS");
+                accelerationParticles.Play();
+            }
+        }
+        else if (accelerationParticles.isEmitting) {
+            Debug.Log("Stop PS");
+            accelerationParticles.Stop();
+        }
+    }
+
     public void OnDisable() {
         rotateAction.Disable();
         accelerationAction.Disable();
