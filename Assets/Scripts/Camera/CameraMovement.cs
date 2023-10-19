@@ -41,9 +41,12 @@ public class CameraMovement : MonoBehaviour
     private void HandleMovementBasedOffset() {
         if (target.gameObject.CompareTag("Player") && movementBasedOffset) {
             Vector2 playerMovementVec = target.GetComponent<Movement>().GetInputVector();
-            playerMovementVec += target.GetComponent<Movement>().MovementDirection;
-            xMovementOffset = Mathf.SmoothDamp(xMovementOffset, playerMovementVec.x * movementOffsetMultiplier, ref xMovementOffsetVelocity, movementDampTime);
-            yMovementOffset = Mathf.SmoothDamp(yMovementOffset, playerMovementVec.y * movementOffsetMultiplier, ref yMovementOffsetVelocity, movementDampTime);
+            Vector2 movementDir = target.GetComponent<Movement>().MovementDirection;
+            playerMovementVec += movementDir;
+            // xMovementOffset = Mathf.SmoothDamp(xMovementOffset, playerMovementVec.x * movementOffsetMultiplier, ref xMovementOffsetVelocity, movementDampTime);
+            // yMovementOffset = Mathf.SmoothDamp(yMovementOffset, playerMovementVec.y * movementOffsetMultiplier, ref yMovementOffsetVelocity, movementDampTime);
+            xMovementOffset = movementDir.x * movementOffsetMultiplier;
+            yMovementOffset = movementDir.y * movementOffsetMultiplier;
         }
     }
 

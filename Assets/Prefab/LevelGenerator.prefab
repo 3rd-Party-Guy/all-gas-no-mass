@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: e570842937d1ecc4997f339fc459410a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   width: 420
   height: 120
   randomFillPercent: 45
-  seed: fdsafsd
+  seed: 
   useRandomSeed: 1
   smoothRecursions: 2
 --- !u!114 &4527367189020237931
@@ -130,4 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a056b98e38de0324496553d5f666ba86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityThreshhold: 10
+  velocityThreshhold: 15

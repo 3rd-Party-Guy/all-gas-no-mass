@@ -9,6 +9,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int height;
     [Range(0, 100)]
     [SerializeField] int randomFillPercent;
+    [Range(0.5f, 5f)]
+    [SerializeField] float squareSize;
     [SerializeField] string seed;
     [SerializeField] bool useRandomSeed;
     [SerializeField] int smoothRecursions;
@@ -25,7 +27,7 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i < smoothRecursions; i++)
             SmoothMap();
 
-        meshGenerator.GenerateMesh(map, 1);
+        meshGenerator.GenerateMesh(map, squareSize);
     }
 
     private void GenerateMap() {
@@ -34,7 +36,7 @@ public class MapGenerator : MonoBehaviour
 
     private void RandomFillMap() {
         if (useRandomSeed) {
-            seed = Time.time.ToString();
+            seed = System.DateTime.Now.ToString();
         }
 
         System.Random prng = new System.Random(seed.GetHashCode());

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8691139027102529737}
   - component: {fileID: 7467012814904252706}
   - component: {fileID: 2460697840998382314}
+  - component: {fileID: 8544463783159446542}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 780850394747093722, guid: 014b36ceee771254abbe469b107f2d87, type: 3}
+  playerDeathPrefab: {fileID: 6441378892987144841, guid: 212e0ef56b5b648498496a937ef1da16, type: 3}
   respawnPlayerAction:
     m_Name: Respawn Player
     m_Type: 1
@@ -107,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   gameStateUpdateText: {fileID: 0}
+  timeText: {fileID: 0}
 --- !u!114 &2460697840998382314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,3 +122,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb418f896c202c4a975b936df089d8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8544463783159446542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c30627bc907f945940b7c53ea4d8f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 7372882589008680066, guid: 43622fefb371e1e48be9335e00ee2dc7, type: 3}
+  goalPrefab: {fileID: 8349086528564124078, guid: 669931758d205374e82113b63f5cc0a4, type: 3}
+  coinAmount: 25
+  goalAmount: 1

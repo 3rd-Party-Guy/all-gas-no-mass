@@ -28,6 +28,19 @@ public class SquareGrid
         }
     }
 
+    public Node GetFreeNode() {
+        int amountOfSquares = squareGrid.GetLength(0) + squareGrid.GetLength(1);
+        
+        for (int i = 0; i < amountOfSquares; i++) {
+            Square s = squareGrid[Random.Range(0, squareGrid.GetLength(0)), Random.Range(0, squareGrid.GetLength(1))];
+            ControlNode freeNode = s.GetFreeNode();
+            if (freeNode == null) continue;
+            return freeNode;
+        }
+
+        return null;                                                                    // no free squares left
+    }
+
     public Square[,] Grid {
         get => squareGrid;
     }

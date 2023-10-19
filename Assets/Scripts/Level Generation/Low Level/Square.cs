@@ -21,6 +21,15 @@ public class Square
         if (bottomLeft.Active) configuration += 1;
     }
 
+    public ControlNode GetFreeNode() {
+        if (!topLeft.Active) return topLeft;
+        if (!topRight.Active) return topRight;
+        if (!bottomRight.Active) return bottomRight;
+        if (!bottomLeft.Active) return bottomLeft;
+
+        return null;
+    }
+
     public ControlNode TopLeft { get => topLeft; }
     public ControlNode TopRight { get => topRight; }
     public ControlNode BottomRight { get => bottomRight; }

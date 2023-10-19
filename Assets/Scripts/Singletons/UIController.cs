@@ -32,7 +32,16 @@ public class UIController : MonoBehaviour
     }
 
     private void Update() {
-        timeText.text = timer.ElapsedTime.ToString("0.00", CultureInfo.InvariantCulture);
+        if (timer.ElapsedTime > TimeSpan.MaxValue.TotalSeconds) {
+            timeText.text = "Get help.";
+            return;
+        }
+        TimeSpan elapsedTime = TimeSpan.FromSeconds(timer.ElapsedTime);
+        if (elapsedTime.TotalMinutes < 1)
+            timeText.text = elapsedTime.ToString(@"ss\:ff");
+        else
+            timeText.text = elapsedTime.ToString(@"mm\:ss\:ff");
+        // timeText.text = timer.ElapsedTime.ToString("0.00", CultureInfo.InvariantCulture);
     }
 
     private void UpdateGameState(object e, EventArgs args) {

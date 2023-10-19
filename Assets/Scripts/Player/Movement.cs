@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     float rotationAmount = 0f;
     Vector3 rotationVec = new Vector3();
     float acceleration = 0f;
+    bool isGrounded = false;
 
     ParticleSystem accelerationParticles;
 
@@ -39,6 +40,21 @@ public class Movement : MonoBehaviour
         HandleRotation();
         HandleParticleSystem();
     }   
+    
+    public void FixedUpdate() {
+        rb.AddForce(transform.up * velocity * Time.fixedDeltaTime, ForceMode2D.Impulse);
+
+        IsGrounded();
+    }
+
+    private void IsGrounded() {
+        int playerLayerIndex = 6;
+        int raycastLayerMask = ~(1 << playerLayerIndex);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 1.4f, raycastLayerMask);
+        Debug.DrawRay(transform.position, -transform.up * 1.4f, Color.green);
+        isGrounded = (hit.collider != null);
+    }
 
     private void ReadInput() {
         rotationAmount = rotateAction.ReadValue<float>();
@@ -58,9 +74,17 @@ public class Movement : MonoBehaviour
         rb.angularVelocity += rotAngle;
     }
 
-    public void FixedUpdate() {
-        rb.AddForce(transform.up * velocity * Time.fixedDeltaTime, ForceMode2D.Impulse);
+    private void HandleParticleSystem() {
+        if (acceleration >= 0.1f) {
+            if (!accelerationParticles.isEmitting && !isGrounded) {
+                accelerationParticles.Play();
+            }
+        }
+        else if (accelerationParticles.isEmitting) {
+            accelerationParticles.Stop();
+        }
     }
+
 
     public void OnEnable() {
         rotateAction.Enable();
@@ -71,20 +95,6 @@ public class Movement : MonoBehaviour
         return new Vector2(rotationAmount, acceleration);
     }
 
-    private void HandleParticleSystem() {
-        Debug.Log("Current Acceleration: " + acceleration);
-        if (acceleration >= 0.1f) {
-            Debug.Log("SHOULD Play PS");
-            if (!accelerationParticles.isEmitting) {
-                Debug.Log("Play PS");
-                accelerationParticles.Play();
-            }
-        }
-        else if (accelerationParticles.isEmitting) {
-            Debug.Log("Stop PS");
-            accelerationParticles.Stop();
-        }
-    }
 
     public void OnDisable() {
         rotateAction.Disable();

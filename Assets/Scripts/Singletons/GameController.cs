@@ -10,7 +10,13 @@ public class GameController : MonoBehaviour
     private ScoreSystem scoreSystem;
     private UIController uiController;
 
+    private MapGenerator mapGenerator;
+    private MeshGenerator meshGenerator;
+
+    private InteractableGenerator interactableGenerator;
+
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject playerDeathPrefab;
     GameObject player;
     GameStateType gameState;
     Transform levelStart;
@@ -36,29 +42,51 @@ public class GameController : MonoBehaviour
     }
 
     private void Start() {
-        levelStart = GameObject.FindGameObjectWithTag("LevelStart").transform;
+        GameObject levelStartObj = GameObject.FindGameObjectWithTag("LevelStart");
+        if (levelStartObj == null)
+            levelStart = null;
+        else
+            levelStart = levelStartObj.transform;
+            
         RespawnPlayer(false);
 
         respawnPlayerAction.performed += _ => RespawnPlayer(true);
-    }
 
-    private void Update() {
+        interactableGenerator.GenerateInteractables();
     }
 
     private void RespawnPlayer(bool isRestart = true) {
-        if (isRestart)
+        if (isRestart) {
             OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
+            
+            GameObject go = Instantiate(playerDeathPrefab);
+            Destroy(go, 5);
+        }
         Destroy(player);
         
         player = Instantiate(playerPrefab);
-        player.transform.position = levelStart.transform.position;
-        player.transform.rotation = levelStart.transform.rotation;
+        if (levelStart == null)
+            player.transform.position = meshGenerator.GetFreePosition();
+        else {
+            player.transform.position = levelStart.position;
+            player.transform.rotation = levelStart.transform.rotation;
+        }
 
         Camera.main.GetComponent<CameraMovement>().Target = player.transform;
     }
 
     private void SetupSubsingletons() {
         scoreSystem = GetComponent<ScoreSystem>();
+        uiController = GetComponent<UIController>();
+        interactableGenerator = GetComponent<InteractableGenerator>();
+
+        GameObject mapGenObject = GameObject.FindGameObjectWithTag("LevelGenerator");
+        mapGenerator = mapGenObject.GetComponent<MapGenerator>();
+        meshGenerator = mapGenObject.GetComponent<MeshGenerator>();
+    }
+
+    public Vector3 GetFreePosition() {
+        return meshGenerator.GetFreePosition();
     }
 
     public void CompleteLevel() {
