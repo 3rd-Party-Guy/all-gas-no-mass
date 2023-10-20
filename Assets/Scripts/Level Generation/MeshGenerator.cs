@@ -38,7 +38,17 @@ public class MeshGenerator : MonoBehaviour
     }
 
     public Vector3 GetFreePosition() {
-        return squareGrid.GetFreeNode().Position;
+        int playerLayerIndex = 6;
+        int raycastLayerIndex = ~(1 << playerLayerIndex);
+
+        for (int i = 0; i < 25; i++) {
+            Vector3 potentialPosition = squareGrid.GetFreeNode().Position;
+            Collider2D col = Physics2D.OverlapCircle(potentialPosition, 1f, raycastLayerIndex, 0f, 0f);
+            if (col == null)
+                return potentialPosition;
+        }
+
+        return Vector3.zero;
     }
 
 #region Edge Triangulation

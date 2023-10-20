@@ -19,9 +19,7 @@ public class CameraMovement : MonoBehaviour
     [Header("Camera Reaction to Player Movement")]
     [SerializeField] bool movementBasedOffset = false;
     [SerializeField] float movementOffsetMultiplier = 2f;
-    [SerializeField] float movementDampTime = 1f;
     float xMovementOffset, yMovementOffset = 0f;
-    float xMovementOffsetVelocity, yMovementOffsetVelocity = 0f;
 
     public void FixedUpdate() {
         if (target == null) return;
