@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.7999733, y: 4.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,7 +120,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.59
 --- !u!114 &3122670209036695165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,3 +134,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmount: 10
+  scoreAudios:
+  - {fileID: 8300000, guid: 5e6248311f92c4143943ed6d18f89c02, type: 3}
+  - {fileID: 8300000, guid: d4f192d1b597de04b97dd78a270452ce, type: 3}
+  - {fileID: 8300000, guid: bab0e0c384a2b914a8962d152c37edc1, type: 3}
+  - {fileID: 8300000, guid: 4004a346aedc82549864555074bfe755, type: 3}
+  - {fileID: 8300000, guid: 8fbb5551ed68d484394d87c3153f1a1d, type: 3}
+  - {fileID: 8300000, guid: 424d960cbe03d674990c46e44fbde7ee, type: 3}
+  - {fileID: 8300000, guid: 5e7ee4faa356b3c44a071d0ef78595a2, type: 3}
+  - {fileID: 8300000, guid: ed5db3e9249cac3458eb643ec01c6ab2, type: 3}
+  - {fileID: 8300000, guid: 42937a70e5427f84bb53164a59a54f01, type: 3}
+  - {fileID: 8300000, guid: 1a49c16a48fdfca45afaddb42bb4ecaa, type: 3}

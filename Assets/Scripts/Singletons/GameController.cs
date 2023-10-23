@@ -17,9 +17,13 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject playerDeathPrefab;
+    [SerializeField] private AudioClip playerDeathSound;
+    
+    AudioSource audioSource;
     GameObject player;
     GameStateType gameState;
     Transform levelStart;
+
 
     public event EventHandler OnLevelComplete;
     public event EventHandler OnGameStateChange;
@@ -34,6 +38,7 @@ public class GameController : MonoBehaviour
             SetupSubsingletons();
 
             player = GameObject.FindGameObjectWithTag("Player");
+            audioSource = GetComponent<AudioSource>();
 
             return;
         }
@@ -57,6 +62,7 @@ public class GameController : MonoBehaviour
 
     private void RespawnPlayer(bool isRestart = true) {
         if (isRestart) {
+            AudioPlayer.PlayOneShot(playerDeathSound);
             OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
             
             GameObject go = Instantiate(playerDeathPrefab);
@@ -116,5 +122,9 @@ public class GameController : MonoBehaviour
 
     public ScoreSystem ScoreSystem {
         get => scoreSystem;
+    }
+
+    public AudioSource AudioPlayer {
+        get => audioSource;
     }
 }

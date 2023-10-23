@@ -18,6 +18,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float accelerationTime = 0.3f;                                         // in secords
     [SerializeField] float rotationMultiplier = 10f;
 
+    [Space]
+
+    [Header("Audio Configuration")]
+    [SerializeField] private AudioClip accelerationAudioClip;
+
+    bool isAccelerationSoundPlaying = false;
+
     float velocity = 0f;
     float velocityAccelerationReference = 0f;
 
@@ -27,11 +34,14 @@ public class Movement : MonoBehaviour
     float acceleration = 0f;
     bool isGrounded = false;
 
+    AudioSource accelerationAudioSource;
     ParticleSystem accelerationParticles;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         accelerationParticles = GetComponent<ParticleSystem>();
+        accelerationAudioSource = GetComponent<AudioSource>();
+        accelerationAudioSource.clip = accelerationAudioClip;
     }
 
     public void Update() {
@@ -39,12 +49,26 @@ public class Movement : MonoBehaviour
         HandleAcceleration();
         HandleRotation();
         HandleParticleSystem();
+        HandleAccelerationAudio();
     }   
     
     public void FixedUpdate() {
         rb.AddForce(transform.up * velocity * Time.fixedDeltaTime, ForceMode2D.Impulse);
 
         IsGrounded();
+    }
+
+    private void HandleAccelerationAudio() {
+        if (acceleration > 0) {
+            if (!isAccelerationSoundPlaying) {
+                accelerationAudioSource.Play();
+                isAccelerationSoundPlaying = true;
+            }
+        }
+        else if (isAccelerationSoundPlaying) {
+            accelerationAudioSource.Stop();
+            isAccelerationSoundPlaying = false;
+        }
     }
 
     private void IsGrounded() {
