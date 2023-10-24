@@ -12,16 +12,16 @@ public class GameController : MonoBehaviour
 
     private MapGenerator mapGenerator;
     private MeshGenerator meshGenerator;
-
     private InteractableGenerator interactableGenerator;
+    private DifficultyController difficultyController;
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject playerDeathPrefab;
     [SerializeField] private AudioClip playerDeathSound;
     
-    AudioSource audioSource;
-    GameObject player;
-    Transform levelStart;
+    private AudioSource audioSource;
+    private GameObject player;
+    private Transform levelStart;
 
     [SerializeField] private int levelAmountGoal;
     private int levelsCompleted;
@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour
 
     private void Start() {
         GameObject levelStartObj = GameObject.FindGameObjectWithTag("LevelStart");
+        
         if (levelStartObj == null)
             levelStart = null;
         else
@@ -100,6 +101,7 @@ public class GameController : MonoBehaviour
         scoreSystem = GetComponent<ScoreSystem>();
         uiController = GetComponent<UIController>();
         interactableGenerator = GetComponent<InteractableGenerator>();
+        difficultyController = GetComponent<DifficultyController>();
 
         GameObject mapGenObject = GameObject.FindGameObjectWithTag("LevelGenerator");
         mapGenerator = mapGenObject.GetComponent<MapGenerator>();
@@ -148,6 +150,10 @@ public class GameController : MonoBehaviour
 
     public AudioSource AudioPlayer {
         get => audioSource;
+    }
+
+    public GameObject Player {
+        get => player;
     }
 
     public Transform PlayerTransform {

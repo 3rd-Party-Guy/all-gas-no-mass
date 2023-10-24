@@ -1068,10 +1068,6 @@ PrefabInstance:
       propertyPath: updateText
       value: 
       objectReference: {fileID: 587241632}
-    - target: {fileID: 7467012814904252706, guid: 340dcc64e75c8f74b94c5ab7bd95272b, type: 3}
-      propertyPath: gameStateUpdateText
-      value: 
-      objectReference: {fileID: 587241632}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

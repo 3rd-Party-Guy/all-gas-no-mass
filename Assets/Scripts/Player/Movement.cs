@@ -109,6 +109,13 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void ChangeMovementDifficulty(float newMaxVel, float rotationMul, float newAccelTime = -1) {
+        max_velocity = newMaxVel;
+        rotationMultiplier = rotationMul;
+        
+        if (newAccelTime != -1)
+            accelerationTime = newAccelTime;
+    }
 
     public void OnEnable() {
         rotateAction.Enable();

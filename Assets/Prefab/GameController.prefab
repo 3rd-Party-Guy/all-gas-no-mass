@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2460697840998382314}
   - component: {fileID: 8544463783159446542}
   - component: {fileID: 9099933177910730045}
+  - component: {fileID: 6417389474637755485}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -86,6 +87,7 @@ MonoBehaviour:
       m_Action: Respawn Player
       m_Flags: 0
     m_Flags: 0
+  isPlayerDead: 0
 --- !u!114 &8691139027102529737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
   levelsText: {fileID: 0}
-  gameStateUpdateText: {fileID: 0}
+  updateText: {fileID: 0}
   timeText: {fileID: 0}
 --- !u!114 &2460697840998382314
 MonoBehaviour:
@@ -238,3 +240,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6417389474637755485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4a8019aa328144ab7b0f80e0103c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
