@@ -52,7 +52,7 @@ public class UIController : MonoBehaviour
 
         switch (curGameState) {
         case GameStateType.GameOver:
-            StartCoroutine(FlashStatusChange("Try Again"));
+            StartCoroutine(FlashStatusChange("Death " + GameController.Instance.PlayerDeaths.ToString()));
             break;
         }
     }
@@ -68,7 +68,9 @@ public class UIController : MonoBehaviour
 
     private void UpdateScoreUI(object e, EventArgs args) {
         int newScore = GameController.Instance.ScoreSystem.Score;
-        scoreText.text = newScore.ToString();
+        int newMinScore = GameController.Instance.ScoreSystem.MinScore;
+
+        scoreText.text = newScore.ToString() + "/" + newMinScore.ToString();
     }
 
     private IEnumerator FlashStatusChange(string statusText, float flashTime = defaultFlashTime) {

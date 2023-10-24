@@ -25,7 +25,8 @@ public class GameController : MonoBehaviour
     Transform levelStart;
 
     [SerializeField] private int levelAmountGoal;
-    int levelsCompleted;
+    private int levelsCompleted;
+    private int playerDeaths;
 
     public event EventHandler OnLevelComplete;
     public event EventHandler OnGameCompleted;
@@ -63,6 +64,7 @@ public class GameController : MonoBehaviour
         interactableGenerator.GenerateInteractables();
 
         levelsCompleted = 0;
+        playerDeaths = 0;
 
         mapGenerator.OnLevelGenerationComplete += RespawnPlayer;
     }
@@ -128,6 +130,10 @@ public class GameController : MonoBehaviour
 
     public int CompletedLevelsAmount {
         get => levelsCompleted;
+    }
+
+    public int PlayerDeaths {
+        get => playerDeaths;
     }
 
     public GameStateType GameState {
