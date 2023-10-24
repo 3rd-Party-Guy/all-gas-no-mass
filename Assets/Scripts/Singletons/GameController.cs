@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private InputAction respawnPlayerAction;
 
+    public bool isPlayerDead;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -90,6 +92,8 @@ public class GameController : MonoBehaviour
         }
 
         Camera.main.GetComponent<CameraMovement>().Target = player.transform;
+
+        isPlayerDead = false;
     }
 
     private void SetupSubsingletons() {
