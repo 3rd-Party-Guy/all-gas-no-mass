@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
     
     AudioSource audioSource;
     GameObject player;
-    GameStateType gameState;
     Transform levelStart;
 
     [SerializeField] private int levelAmountGoal;
@@ -30,7 +29,7 @@ public class GameController : MonoBehaviour
 
     public event EventHandler OnLevelComplete;
     public event EventHandler OnGameCompleted;
-    public event EventHandler OnGameStateChange;
+    public event EventHandler OnPlayerDeath;
     public event EventHandler OnPlayerRespawn;
 
     [SerializeField] private InputAction respawnPlayerAction;
@@ -73,12 +72,17 @@ public class GameController : MonoBehaviour
 
     private void RespawnPlayer(bool isDeath = true) {
         if (isDeath) {
+            playerDeaths++;
+
             AudioPlayer.PlayOneShot(playerDeathSound);
             OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
             
             GameObject go = Instantiate(playerDeathPrefab);
             Destroy(go, 5);
+
+            OnPlayerDeath?.Invoke(this, EventArgs.Empty);
         }
+        
         Destroy(player);
         
         player = Instantiate(playerPrefab);
@@ -116,7 +120,6 @@ public class GameController : MonoBehaviour
     }
 
     public void GameOver() {
-        GameState = GameStateType.GameOver;
         RespawnPlayer();
     }
 
@@ -134,14 +137,6 @@ public class GameController : MonoBehaviour
 
     public int PlayerDeaths {
         get => playerDeaths;
-    }
-
-    public GameStateType GameState {
-        get => gameState;
-        private set {
-            gameState = value;
-            OnGameStateChange?.Invoke(this, EventArgs.Empty);
-        }
     }
 
     public ScoreSystem ScoreSystem {

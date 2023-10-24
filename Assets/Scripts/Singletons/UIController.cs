@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text levelsText;
-    [SerializeField] TMP_Text gameStateUpdateText;
+    [SerializeField] TMP_Text updateText;
     [SerializeField] TMP_Text timeText;
 
 
@@ -24,12 +24,12 @@ public class UIController : MonoBehaviour
 
     private void Start() {
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MainUI"));
-        gameStateUpdateText.gameObject.SetActive(false);
+        updateText.gameObject.SetActive(false);
 
         timer = GetComponent<Timer>();
 
         GameController.Instance.ScoreSystem.OnScoreChange += UpdateScoreUI;
-        GameController.Instance.OnGameStateChange  += UpdateGameState;
+        GameController.Instance.OnPlayerDeath  += FlashUpdate;
         GameController.Instance.OnLevelComplete += CompleteLevelUI;
         GameController.Instance.OnLevelComplete += UpdateLevelScoreUI;
     }
@@ -47,14 +47,8 @@ public class UIController : MonoBehaviour
         // timeText.text = timer.ElapsedTime.ToString("0.00", CultureInfo.InvariantCulture);
     }
 
-    private void UpdateGameState(object e, EventArgs args) {
-        GameStateType curGameState = GameController.Instance.GameState;
-
-        switch (curGameState) {
-        case GameStateType.GameOver:
-            StartCoroutine(FlashStatusChange("Death " + GameController.Instance.PlayerDeaths.ToString()));
-            break;
-        }
+    private void FlashUpdate(object e, EventArgs args) {
+        StartCoroutine(FlashStatusChange("Death " + GameController.Instance.PlayerDeaths.ToString()));
     }
 
     private void CompleteLevelUI(object e, EventArgs args) {
@@ -74,9 +68,9 @@ public class UIController : MonoBehaviour
     }
 
     private IEnumerator FlashStatusChange(string statusText, float flashTime = defaultFlashTime) {
-        gameStateUpdateText.gameObject.SetActive(true);
-        gameStateUpdateText.text = statusText;
+        updateText.gameObject.SetActive(true);
+        updateText.text = statusText;
         yield return new WaitForSeconds(flashTime);
-        gameStateUpdateText.gameObject.SetActive(false);
+        updateText.gameObject.SetActive(false);
     }
 }

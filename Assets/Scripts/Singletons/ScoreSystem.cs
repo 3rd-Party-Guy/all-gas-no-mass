@@ -10,14 +10,18 @@ public class ScoreSystem : MonoBehaviour
     private int minScore;
 
     private void Start() {
+        minScore = 0;
+        
         GameController.Instance.OnLevelComplete += CalculateMinScore;
+        CalculateMinScore(this, EventArgs.Empty);
     }
 
     private void CalculateMinScore(object e, EventArgs data) {
-        int minScoreMin = GameController.Instance.CompletedLevelsAmount * 250;
-        int minScoreMax = (GameController.Instance.CompletedLevelsAmount + 1) * 250;
+        int minScoreMin = minScore;
+        int minScoreMax = (GameController.Instance.CompletedLevelsAmount + 3) * 250;
 
         minScore = UnityEngine.Random.Range(minScoreMin, minScoreMax);
+        OnScoreChange?.Invoke(this, EventArgs.Empty);
     }
 
     public int Score {
