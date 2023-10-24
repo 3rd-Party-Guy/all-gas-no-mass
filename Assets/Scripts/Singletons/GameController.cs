@@ -127,4 +127,8 @@ public class GameController : MonoBehaviour
     public AudioSource AudioPlayer {
         get => audioSource;
     }
+
+    public Transform PlayerTransform {
+        get  => player.transform;
+    }
 }
