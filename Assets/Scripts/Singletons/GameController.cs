@@ -111,6 +111,9 @@ public class GameController : MonoBehaviour
     }
 
     public void CompleteLevel() {
+        if (!scoreSystem.IsEnough())
+            return;
+            
         levelsCompleted++;
 
         if (levelsCompleted >= levelAmountGoal)

@@ -65,6 +65,11 @@ public class UIController : MonoBehaviour
         int newMinScore = GameController.Instance.ScoreSystem.MinScore;
 
         scoreText.text = newScore.ToString() + "/" + newMinScore.ToString();
+
+        if (GameController.Instance.ScoreSystem.IsEnough())
+            scoreText.color = new Color(0, 255, 0, 255);
+        else
+            scoreText.color = new Color(255, 0, 0, 255);
     }
 
     private IEnumerator FlashStatusChange(string statusText, float flashTime = defaultFlashTime) {

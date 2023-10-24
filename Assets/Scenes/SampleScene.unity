@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 587241633}
   - component: {fileID: 587241632}
   m_Layer: 5
-  m_Name: GameStateUpdateText
+  m_Name: UpdateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
