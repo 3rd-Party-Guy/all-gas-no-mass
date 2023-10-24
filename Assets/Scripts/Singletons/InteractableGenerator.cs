@@ -20,8 +20,20 @@ public class InteractableGenerator : MonoBehaviour
     }
 
     public void GenerateInteractables(object e, EventArgs data) {
+        DeletePreviousInteractables();
         GenerateCoins();
         GenerateGoals();
+    }
+
+    private void DeletePreviousInteractables() {
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+        GameObject[] landpoints = GameObject.FindGameObjectsWithTag("Landpoint");
+
+        foreach(GameObject coin in coins)
+            Destroy(coin);
+
+        foreach(GameObject landpoint in landpoints)
+            Destroy(landpoint);
     }
 
     private void GenerateCoins() {

@@ -56,8 +56,6 @@ public class GameController : MonoBehaviour
         else
             levelStart = levelStartObj.transform;
             
-        RespawnPlayer(false);
-
         respawnPlayerAction.performed += _ => RespawnPlayer(true);
 
         levelsCompleted = 0;
