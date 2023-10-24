@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,11 @@ public class InteractableGenerator : MonoBehaviour
     [SerializeField] private uint coinAmount;
     [SerializeField] private uint goalAmount = 1;
 
-    public void GenerateInteractables() {
+    private void Start() {
+        GameController.Instance.MapGen.OnLevelGenerationComplete += GenerateInteractables;
+    }
+
+    public void GenerateInteractables(object e, EventArgs data) {
         GenerateCoins();
         GenerateGoals();
     }

@@ -22,6 +22,7 @@ public class MeshGenerator : MonoBehaviour
         triangleDictionary = new Dictionary<int, List<Triangle>>();
         outlines = new List<List<int>>();
         checkedVertices = new HashSet<int>();
+        squareGrid = null;
     }
 
     public void GenerateMesh(int[,] map, float squareSize) {

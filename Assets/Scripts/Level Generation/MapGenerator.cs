@@ -17,14 +17,18 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int smoothRecursions;
     int[,] map;
 
+    bool isFirstWorld;
+
     MeshGenerator meshGenerator;
 
     public event EventHandler OnLevelGenerationComplete;
 
     private void Start() {
         meshGenerator = GetComponent<MeshGenerator>();
+        isFirstWorld = true;
 
         GameController.Instance.OnLevelComplete += CreateNewWorld;
+
 
         CreateNewWorld();
     }
@@ -32,17 +36,20 @@ public class MapGenerator : MonoBehaviour
     private void CreateNewWorld(object e, EventArgs data) => CreateNewWorld();
 
     private void CreateNewWorld() {
+        if (!isFirstWorld)
             meshGenerator.Clear();
             
-            GenerateMap();
-            RandomFillMap();
+        GenerateMap();
+        RandomFillMap();
 
-            for (int i = 0; i < smoothRecursions; i++)
-                SmoothMap();
+        for (int i = 0; i < smoothRecursions; i++)
+            SmoothMap();
 
-            meshGenerator.GenerateMesh(map, squareSize);
+        meshGenerator.GenerateMesh(map, squareSize);
 
-            OnLevelGenerationComplete?.Invoke(this, EventArgs.Empty);
+        isFirstWorld = false;
+        
+        OnLevelGenerationComplete?.Invoke(this, EventArgs.Empty);
     }
 
     private void GenerateMap() {

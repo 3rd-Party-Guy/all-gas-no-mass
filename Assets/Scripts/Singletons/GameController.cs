@@ -60,8 +60,6 @@ public class GameController : MonoBehaviour
 
         respawnPlayerAction.performed += _ => RespawnPlayer(true);
 
-        interactableGenerator.GenerateInteractables();
-
         levelsCompleted = 0;
         playerDeaths = 0;
 
@@ -151,6 +149,10 @@ public class GameController : MonoBehaviour
     }
 
     public Transform PlayerTransform {
-        get  => player.transform;
+        get => player.transform;
+    }
+
+    public MapGenerator MapGen {
+        get => mapGenerator;
     }
 }
