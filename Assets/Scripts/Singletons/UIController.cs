@@ -10,8 +10,10 @@ public class UIController : MonoBehaviour
 {
     [Header("UI Components")]
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text levelsText;
     [SerializeField] TMP_Text gameStateUpdateText;
     [SerializeField] TMP_Text timeText;
+
 
     [Space]
 
@@ -29,6 +31,7 @@ public class UIController : MonoBehaviour
         GameController.Instance.ScoreSystem.OnScoreChange += UpdateScoreUI;
         GameController.Instance.OnGameStateChange  += UpdateGameState;
         GameController.Instance.OnLevelComplete += CompleteLevelUI;
+        GameController.Instance.OnLevelComplete += UpdateLevelScoreUI;
     }
 
     private void Update() {
@@ -56,6 +59,11 @@ public class UIController : MonoBehaviour
 
     private void CompleteLevelUI(object e, EventArgs args) {
         StartCoroutine(FlashStatusChange("Level Completed!"));
+    }
+
+    private void UpdateLevelScoreUI(object e, EventArgs args) {
+        int newLevelScore = GameController.Instance.CompletedLevelsAmount;
+        levelsText.text = newLevelScore.ToString();
     }
 
     private void UpdateScoreUI(object e, EventArgs args) {

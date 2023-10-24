@@ -24,8 +24,11 @@ public class GameController : MonoBehaviour
     GameStateType gameState;
     Transform levelStart;
 
+    [SerializeField] private int levelAmountGoal;
+    int levelsCompleted;
 
     public event EventHandler OnLevelComplete;
+    public event EventHandler OnGameCompleted;
     public event EventHandler OnGameStateChange;
     public event EventHandler OnPlayerRespawn;
 
@@ -58,10 +61,16 @@ public class GameController : MonoBehaviour
         respawnPlayerAction.performed += _ => RespawnPlayer(true);
 
         interactableGenerator.GenerateInteractables();
+
+        levelsCompleted = 0;
+
+        mapGenerator.OnLevelGenerationComplete += RespawnPlayer;
     }
 
-    private void RespawnPlayer(bool isRestart = true) {
-        if (isRestart) {
+    private void RespawnPlayer(object e, EventArgs data) => RespawnPlayer(false);
+
+    private void RespawnPlayer(bool isDeath = true) {
+        if (isDeath) {
             AudioPlayer.PlayOneShot(playerDeathSound);
             OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
             
@@ -96,6 +105,11 @@ public class GameController : MonoBehaviour
     }
 
     public void CompleteLevel() {
+        levelsCompleted++;
+
+        if (levelsCompleted >= levelAmountGoal)
+            OnGameCompleted?.Invoke(this, EventArgs.Empty);
+
         OnLevelComplete?.Invoke(this, EventArgs.Empty);
     }
 
@@ -110,6 +124,10 @@ public class GameController : MonoBehaviour
 
     private void OnDisable() {
         respawnPlayerAction.Disable();
+    }
+
+    public int CompletedLevelsAmount {
+        get => levelsCompleted;
     }
 
     public GameStateType GameState {

@@ -16,6 +16,14 @@ public class MeshGenerator : MonoBehaviour
     private SquareGrid squareGrid;
     MeshFilter walls;
 
+    public void Clear() {
+        vertices = new List<Vector3>();
+        triangles = new List<int>();
+        triangleDictionary = new Dictionary<int, List<Triangle>>();
+        outlines = new List<List<int>>();
+        checkedVertices = new HashSet<int>();
+    }
+
     public void GenerateMesh(int[,] map, float squareSize) {
         squareGrid = new SquareGrid(map, squareSize);
         

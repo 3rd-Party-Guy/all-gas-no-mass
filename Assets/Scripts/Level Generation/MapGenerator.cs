@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,16 +19,30 @@ public class MapGenerator : MonoBehaviour
 
     MeshGenerator meshGenerator;
 
+    public event EventHandler OnLevelGenerationComplete;
+
     private void Start() {
         meshGenerator = GetComponent<MeshGenerator>();
 
-        GenerateMap();
-        RandomFillMap();
+        GameController.Instance.OnLevelComplete += CreateNewWorld;
 
-        for (int i = 0; i < smoothRecursions; i++)
-            SmoothMap();
+        CreateNewWorld();
+    }
 
-        meshGenerator.GenerateMesh(map, squareSize);
+    private void CreateNewWorld(object e, EventArgs data) => CreateNewWorld();
+
+    private void CreateNewWorld() {
+            meshGenerator.Clear();
+            
+            GenerateMap();
+            RandomFillMap();
+
+            for (int i = 0; i < smoothRecursions; i++)
+                SmoothMap();
+
+            meshGenerator.GenerateMesh(map, squareSize);
+
+            OnLevelGenerationComplete?.Invoke(this, EventArgs.Empty);
     }
 
     private void GenerateMap() {

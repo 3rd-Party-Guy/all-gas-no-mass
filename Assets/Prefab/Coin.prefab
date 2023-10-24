@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19fcb270def28049bc44a734bc95dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 10
+  scoreAmount: 250
   scoreAudios:
   - {fileID: 8300000, guid: 5e6248311f92c4143943ed6d18f89c02, type: 3}
   - {fileID: 8300000, guid: d4f192d1b597de04b97dd78a270452ce, type: 3}

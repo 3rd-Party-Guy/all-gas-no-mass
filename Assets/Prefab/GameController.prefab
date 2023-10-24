@@ -52,6 +52,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 780850394747093722, guid: 014b36ceee771254abbe469b107f2d87, type: 3}
   playerDeathPrefab: {fileID: 6441378892987144841, guid: 212e0ef56b5b648498496a937ef1da16, type: 3}
   playerDeathSound: {fileID: 8300000, guid: 89310de8d17452d4987301931af330d5, type: 3}
+  levelAmountGoal: 10
   respawnPlayerAction:
     m_Name: Respawn Player
     m_Type: 1
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
+  levelsText: {fileID: 0}
   gameStateUpdateText: {fileID: 0}
   timeText: {fileID: 0}
 --- !u!114 &2460697840998382314

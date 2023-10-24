@@ -5145,7 +5145,7 @@ MonoBehaviour:
   max_velocity: 750
   min_velocity: 0
   accelerationTime: 0.3
-  rotationMultiplier: 500
+  rotationMultiplier: 800
   accelerationAudioClip: {fileID: 8300000, guid: 3a5de10611ad53844b43f8e3fd7c1c10, type: 3}
 --- !u!199 &255461188844342467
 ParticleSystemRenderer:

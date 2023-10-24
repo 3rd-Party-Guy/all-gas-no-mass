@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
 
     private void Start() {
         isTimerOn = true;
-        GameController.Instance.OnLevelComplete += StopTimer;
+        GameController.Instance.OnGameCompleted += StopTimer;
     }
 
     private void Update() {
@@ -18,7 +18,9 @@ public class Timer : MonoBehaviour
         ElapsedTime += Time.deltaTime;
     }
 
-    private void StopTimer(object e, EventArgs args) {
+    private void StopTimer(object e, EventArgs args) => StopTimer();
+
+    public void StopTimer() {
         isTimerOn = false;
     }
 
