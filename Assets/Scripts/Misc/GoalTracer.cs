@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GoalTracer : MonoBehaviour
 {
-    [SerializeField] Transform pointer;
     [SerializeField] private float paddingX, paddingY;
     Vector3 screenPos;
     Vector2 onScreenPos;
@@ -39,17 +38,21 @@ public class GoalTracer : MonoBehaviour
     }
 
     private void CalculateTracker(GameObject goal) {
+        if (goal == null) {
+            gameObject.GetComponent<Image>().enabled = false;
+            return;
+        }
         Vector3 toPos = goal.transform.position;
         Vector3 fromPos = Camera.main.transform.position;
         fromPos.z = 0f;
         Vector3 dir = (toPos - fromPos).normalized;
         float angle = CalculateVectorAngle(dir);
-        pointer.transform.up = dir;
+        transform.up = dir;
 
         Vector3 targetPosScreen = Camera.main.WorldToScreenPoint(toPos);
         bool isOffScreen = (targetPosScreen.x <= 0 || targetPosScreen.x >= Screen.width ||
                             targetPosScreen.y <= 0 || targetPosScreen.y >= Screen.height);
-        pointer.gameObject.GetComponent<Image>().enabled = isOffScreen;
+        gameObject.GetComponent<Image>().enabled = isOffScreen;
         
         if (isOffScreen) {
             Vector3 cappedTargetScreenPos = targetPosScreen;
@@ -63,8 +66,8 @@ public class GoalTracer : MonoBehaviour
             if (cappedTargetScreenPos.y < yMin) cappedTargetScreenPos.y = yMin;
             else if (cappedTargetScreenPos.y > yMax) cappedTargetScreenPos.y = yMax;
 
-            pointer.position = cappedTargetScreenPos;
-            pointer.localPosition = new Vector3(pointer.localPosition.x, pointer.localPosition.y, 0f);
+            transform.position = cappedTargetScreenPos;
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
         }
     }
 
