@@ -113,4 +113,13 @@ public class MapGenerator : MonoBehaviour
     public Vector2 MapSize {
         get => new Vector2(width, height);
     }
+    public int RandomFillPercent {
+        get => randomFillPercent;
+        set {
+            if (value >= 0 && value <= 100)
+                randomFillPercent = value;
+            else
+                Debug.LogError("Tried to feed Random Fill Percent something outside of 0-100");
+        }
+    }
 }

@@ -47,7 +47,8 @@ public class GoalTracer : MonoBehaviour
         fromPos.z = 0f;
         Vector3 dir = (toPos - fromPos).normalized;
         float angle = CalculateVectorAngle(dir);
-        transform.up = dir;
+        
+        transform.up = (toPos - GameController.Instance.PlayerTransform.position).normalized;
 
         Vector3 targetPosScreen = Camera.main.WorldToScreenPoint(toPos);
         bool isOffScreen = (targetPosScreen.x <= 0 || targetPosScreen.x >= Screen.width ||

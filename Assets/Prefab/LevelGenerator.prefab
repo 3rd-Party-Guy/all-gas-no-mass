@@ -100,10 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 420
   height: 120
-  randomFillPercent: 45
+  randomFillPercent: 40
+  squareSize: 2
   seed: 
   useRandomSeed: 1
-  smoothRecursions: 2
+  smoothRecursions: 3
 --- !u!114 &4527367189020237931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,8 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b744178244854441a0149bcd197df21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeMultiplierBig: 0.4
-  gridSizeMultiplierSmall: 0.15
 --- !u!114 &7751883338812414859
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -34,15 +34,12 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private InputAction respawnPlayerAction;
 
-    public bool isPlayerDead;
-
     private void Awake() {
         if (Instance == null) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
             SetupSubsingletons();
 
-            player = GameObject.FindGameObjectWithTag("Player");
             audioSource = GetComponent<AudioSource>();
 
             return;
@@ -64,7 +61,12 @@ public class GameController : MonoBehaviour
         levelsCompleted = 0;
         playerDeaths = 0;
 
-        mapGenerator.OnLevelGenerationComplete += RespawnPlayer;
+        mapGenerator.OnLevelGenerationComplete += OnLevelGeneration;
+    }
+
+    private void OnLevelGeneration(object e, EventArgs data) {
+        RespawnPlayer(false);
+        difficultyController.ManageDifficulty();
     }
 
     private void RespawnPlayer(object e, EventArgs data) => RespawnPlayer(false);
@@ -77,6 +79,7 @@ public class GameController : MonoBehaviour
             OnPlayerRespawn?.Invoke(this, EventArgs.Empty);
             
             GameObject go = Instantiate(playerDeathPrefab);
+            go.transform.position = player.transform.position;
             Destroy(go, 5);
 
             OnPlayerDeath?.Invoke(this, EventArgs.Empty);
@@ -93,8 +96,6 @@ public class GameController : MonoBehaviour
         }
 
         Camera.main.GetComponent<CameraMovement>().Target = player.transform;
-
-        isPlayerDead = false;
     }
 
     private void SetupSubsingletons() {
@@ -112,10 +113,7 @@ public class GameController : MonoBehaviour
         return meshGenerator.GetFreePosition();
     }
 
-    public void CompleteLevel() {
-        if (!scoreSystem.IsEnough())
-            return;
-            
+    public void CompleteLevel() {        
         levelsCompleted++;
 
         if (levelsCompleted >= levelAmountGoal)
@@ -144,16 +142,16 @@ public class GameController : MonoBehaviour
         get => playerDeaths;
     }
 
+    public UIController UIController {
+        get => uiController;
+    }
+
     public ScoreSystem ScoreSystem {
         get => scoreSystem;
     }
 
     public AudioSource AudioPlayer {
         get => audioSource;
-    }
-
-    public GameObject Player {
-        get => player;
     }
 
     public Transform PlayerTransform {

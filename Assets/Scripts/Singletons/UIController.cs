@@ -29,7 +29,7 @@ public class UIController : MonoBehaviour
         timer = GetComponent<Timer>();
 
         GameController.Instance.ScoreSystem.OnScoreChange += UpdateScoreUI;
-        GameController.Instance.OnPlayerDeath  += FlashUpdate;
+        GameController.Instance.OnPlayerDeath  += FlashDeath;
         GameController.Instance.OnLevelComplete += CompleteLevelUI;
         GameController.Instance.OnLevelComplete += UpdateLevelScoreUI;
     }
@@ -47,7 +47,9 @@ public class UIController : MonoBehaviour
         // timeText.text = timer.ElapsedTime.ToString("0.00", CultureInfo.InvariantCulture);
     }
 
-    private void FlashUpdate(object e, EventArgs args) {
+    public void FlashMessage(string msg) => StartCoroutine(FlashStatusChange(msg));
+
+    private void FlashDeath(object e, EventArgs args) {
         StartCoroutine(FlashStatusChange("Death " + GameController.Instance.PlayerDeaths.ToString()));
     }
 

@@ -8,56 +8,22 @@ public class DifficultyController : MonoBehaviour
     int curLevel = 1;
     private void Start() {
         curLevel = 1;
-        GameController.Instance.OnLevelComplete += ManageDifficulty;
-        ManageDifficulty(this, EventArgs.Empty);
     }
 
-    private void ManageDifficulty(object e, EventArgs data) {
+    public void ManageDifficulty() => ManageDifficulty(this, EventArgs.Empty);
+
+    public void ManageDifficulty(object e, EventArgs data) {
+        Debug.Log("Difficulty Management Initiated...");
         curLevel = GameController.Instance.CompletedLevelsAmount + 1;
         ManageMovement();
+        ManageMapSize();
     }
 
-    private void ManageMapSize() {
-        MapGenerator mapGen = GameController.Instance.MapGen;
-        switch (curLevel) {
-            case 1:
-                mapGen.ChangeSize(360, 120);
-                break;
-            case 2:
-                mapGen.ChangeSize(100, 720);
-                break;
-            case 3:
-                mapGen.ChangeSize(720, 75);
-                break;
-            case 4:
-                mapGen.ChangeSize(420, 360);
-                break;
-            case 5:
-                mapGen.ChangeSize(500, 500);
-                break;
-            case 6:
-                mapGen.ChangeSize(420, 1000);
-                break;
-            case 7:
-                mapGen.ChangeSize(1000, 1000);
-                break;
-            case 8:
-                mapGen.ChangeSize(1000, 1000);
-                break;
-            case 9:
-                mapGen.ChangeSize(1000, 1000);
-                break;
-            case 10:
-                mapGen.ChangeSize(1500, 1500);
-                break;
-            default:
-                Debug.LogError("No Difficulty for this Level");
-                break;
-        }
-    }
 
     private void ManageMovement() {
-        Movement playerMov = GameController.Instance.Player.GetComponent<Movement>();
+        Debug.Log("Player Movement Management Initiated...");
+
+        Movement playerMov = GameController.Instance.PlayerTransform.GetComponent<Movement>();
 
         switch (curLevel) {
             case 1:
@@ -89,6 +55,57 @@ public class DifficultyController : MonoBehaviour
                 break;
             case 10:
                 playerMov.ChangeMovementDifficulty(1000f, 1000f, 0.15f);
+                break;
+            default:
+                Debug.LogError("No Difficulty for this Level");
+                break;
+        }
+    }
+
+    private void ManageMapSize() {
+        Debug.Log("Map Size Management Initiated...");
+
+        MapGenerator mapGen = GameController.Instance.MapGen;
+        switch (curLevel) {
+            case 1:
+                mapGen.ChangeSize(360, 120);
+                mapGen.RandomFillPercent = 40;
+                break;
+            case 2:
+                mapGen.ChangeSize(100, 720);
+                mapGen.RandomFillPercent = 40;
+                break;
+            case 3:
+                mapGen.ChangeSize(720, 25);
+                mapGen.RandomFillPercent = 30;
+                break;
+            case 4:
+                mapGen.ChangeSize(25, 720);
+                mapGen.RandomFillPercent = 33;
+                break;
+            case 5:
+                mapGen.ChangeSize(500, 500);
+                mapGen.RandomFillPercent = 55;
+                break;
+            case 6:
+                mapGen.ChangeSize(420, 640);
+                mapGen.RandomFillPercent = 55;
+                break;
+            case 7:
+                mapGen.ChangeSize(1000, 1000);
+                mapGen.RandomFillPercent = 75;
+                break;
+            case 8:
+                mapGen.ChangeSize(1000, 1000);
+                mapGen.RandomFillPercent = 75;
+                break;
+            case 9:
+                mapGen.ChangeSize(1000, 1000);
+                mapGen.RandomFillPercent = 30;
+                break;
+            case 10:
+                mapGen.ChangeSize(1500, 1500);
+                mapGen.RandomFillPercent = 25;
                 break;
             default:
                 Debug.LogError("No Difficulty for this Level");
