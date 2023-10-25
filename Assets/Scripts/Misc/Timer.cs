@@ -10,12 +10,13 @@ public class Timer : MonoBehaviour
 
     private void Start() {
         isTimerOn = true;
-        GameController.Instance.OnGameCompleted += StopTimer;
+        GameController.Instance.OnGameComplete += StopTimer;
     }
 
     private void Update() {
         if (isTimerOn == false) return;
         ElapsedTime += Time.deltaTime;
+        Debug.Log(ElapsedTime);
     }
 
     private void StopTimer(object e, EventArgs args) => StopTimer();

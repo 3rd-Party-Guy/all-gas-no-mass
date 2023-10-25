@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610205179002071860}
+  - component: {fileID: 9099933177910730045}
   - component: {fileID: 5804733202640584590}
   - component: {fileID: 8691139027102529737}
   - component: {fileID: 7467012814904252706}
   - component: {fileID: 2460697840998382314}
   - component: {fileID: 8544463783159446542}
-  - component: {fileID: 9099933177910730045}
   - component: {fileID: 6417389474637755485}
   m_Layer: 0
   m_Name: GameController
@@ -38,112 +38,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5804733202640584590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141999548793361532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737245fcb5f32c947bba7bf28e5ff06d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 780850394747093722, guid: 014b36ceee771254abbe469b107f2d87, type: 3}
-  playerDeathPrefab: {fileID: 6441378892987144841, guid: 212e0ef56b5b648498496a937ef1da16, type: 3}
-  playerDeathSound: {fileID: 8300000, guid: 89310de8d17452d4987301931af330d5, type: 3}
-  levelAmountGoal: 10
-  respawnPlayerAction:
-    m_Name: Respawn Player
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 112b5ad6-7163-4fdf-941c-d28b2e636f80
-    m_Processors: 
-    m_Interactions: Tap
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 674a7f67-3b38-49aa-bc7d-f4fb4abf6df6
-      m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Respawn Player
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 72d4c64c-9857-4600-9ef3-0e9120c794ef
-      m_Path: <Keyboard>/numpad7
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Respawn Player
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 41777088-9c4d-4b12-959f-49756b86a77f
-      m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Respawn Player
-      m_Flags: 0
-    m_Flags: 0
-  isPlayerDead: 0
---- !u!114 &8691139027102529737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141999548793361532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cb6f6bf3ca86394ab422dadac766168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7467012814904252706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141999548793361532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15cb5d3ddbbecf47ad224efb294ecb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  levelsText: {fileID: 0}
-  updateText: {fileID: 0}
-  timeText: {fileID: 0}
---- !u!114 &2460697840998382314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141999548793361532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cb418f896c202c4a975b936df089d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8544463783159446542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141999548793361532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53c30627bc907f945940b7c53ea4d8f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 7372882589008680066, guid: 43622fefb371e1e48be9335e00ee2dc7, type: 3}
-  goalPrefab: {fileID: 8349086528564124078, guid: 669931758d205374e82113b63f5cc0a4, type: 3}
-  coinAmount: 25
-  goalAmount: 1
 --- !u!82 &9099933177910730045
 AudioSource:
   m_ObjectHideFlags: 0
@@ -240,6 +134,111 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5804733202640584590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737245fcb5f32c947bba7bf28e5ff06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 780850394747093722, guid: 014b36ceee771254abbe469b107f2d87, type: 3}
+  playerDeathPrefab: {fileID: 6441378892987144841, guid: 212e0ef56b5b648498496a937ef1da16, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: 89310de8d17452d4987301931af330d5, type: 3}
+  levelAmountGoal: 10
+  respawnPlayerAction:
+    m_Name: Respawn Player
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 112b5ad6-7163-4fdf-941c-d28b2e636f80
+    m_Processors: 
+    m_Interactions: Tap
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 674a7f67-3b38-49aa-bc7d-f4fb4abf6df6
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Respawn Player
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 72d4c64c-9857-4600-9ef3-0e9120c794ef
+      m_Path: <Keyboard>/numpad7
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Respawn Player
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 41777088-9c4d-4b12-959f-49756b86a77f
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Respawn Player
+      m_Flags: 0
+    m_Flags: 0
+--- !u!114 &8691139027102529737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb6f6bf3ca86394ab422dadac766168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7467012814904252706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15cb5d3ddbbecf47ad224efb294ecb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  levelsText: {fileID: 0}
+  updateText: {fileID: 0}
+  timeText: {fileID: 0}
+--- !u!114 &2460697840998382314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb418f896c202c4a975b936df089d8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8544463783159446542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141999548793361532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c30627bc907f945940b7c53ea4d8f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 7372882589008680066, guid: 43622fefb371e1e48be9335e00ee2dc7, type: 3}
+  goalPrefab: {fileID: 8349086528564124078, guid: 669931758d205374e82113b63f5cc0a4, type: 3}
+  coinAmount: 25
+  goalAmount: 1
 --- !u!114 &6417389474637755485
 MonoBehaviour:
   m_ObjectHideFlags: 0

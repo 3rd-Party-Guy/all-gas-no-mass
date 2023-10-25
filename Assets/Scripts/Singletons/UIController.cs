@@ -14,6 +14,10 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text updateText;
     [SerializeField] TMP_Text timeText;
 
+    [SerializeField] GameObject gameFinishedObject;
+    [SerializeField] TMP_Text finalScoreText;
+    [SerializeField] TMP_Text finalGradeText;
+
 
     [Space]
 
@@ -32,6 +36,9 @@ public class UIController : MonoBehaviour
         GameController.Instance.OnPlayerDeath  += FlashDeath;
         GameController.Instance.OnLevelComplete += CompleteLevelUI;
         GameController.Instance.OnLevelComplete += UpdateLevelScoreUI;
+        GameController.Instance.OnGameComplete += OnGameCompleted;
+
+        gameFinishedObject.SetActive(false);
     }
 
     private void Update() {
@@ -39,12 +46,20 @@ public class UIController : MonoBehaviour
             timeText.text = "Get help.";
             return;
         }
+
         TimeSpan elapsedTime = TimeSpan.FromSeconds(timer.ElapsedTime);
+        
         if (elapsedTime.TotalMinutes < 1)
             timeText.text = elapsedTime.ToString(@"ss\:ff");
         else
             timeText.text = elapsedTime.ToString(@"mm\:ss\:ff");
-        // timeText.text = timer.ElapsedTime.ToString("0.00", CultureInfo.InvariantCulture);
+    }
+
+    private void OnGameCompleted(object e, EventArgs data) {
+        gameFinishedObject.SetActive(true);
+
+        finalScoreText.text += " " + GameController.Instance.ScoreSystem.Score.ToString();
+        finalGradeText.text += " " + GameController.Instance.CalculateGrade();
     }
 
     public void FlashMessage(string msg) => StartCoroutine(FlashStatusChange(msg));

@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
     private ScoreSystem scoreSystem;
     private UIController uiController;
+    private Timer timer;
 
     private MapGenerator mapGenerator;
     private MeshGenerator meshGenerator;
@@ -28,7 +29,7 @@ public class GameController : MonoBehaviour
     private int playerDeaths;
 
     public event EventHandler OnLevelComplete;
-    public event EventHandler OnGameCompleted;
+    public event EventHandler OnGameComplete;
     public event EventHandler OnPlayerDeath;
     public event EventHandler OnPlayerRespawn;
 
@@ -61,7 +62,12 @@ public class GameController : MonoBehaviour
         levelsCompleted = 0;
         playerDeaths = 0;
 
+        OnGameComplete += OnGameCompleted;
         mapGenerator.OnLevelGenerationComplete += OnLevelGeneration;
+    }
+
+    private void OnGameCompleted(object e, EventArgs data) {
+
     }
 
     private void OnLevelGeneration(object e, EventArgs data) {
@@ -101,6 +107,7 @@ public class GameController : MonoBehaviour
     private void SetupSubsingletons() {
         scoreSystem = GetComponent<ScoreSystem>();
         uiController = GetComponent<UIController>();
+        timer = GetComponent<Timer>();
         interactableGenerator = GetComponent<InteractableGenerator>();
         difficultyController = GetComponent<DifficultyController>();
 
@@ -117,9 +124,78 @@ public class GameController : MonoBehaviour
         levelsCompleted++;
 
         if (levelsCompleted >= levelAmountGoal)
-            OnGameCompleted?.Invoke(this, EventArgs.Empty);
+            OnGameComplete?.Invoke(this, EventArgs.Empty);
 
         OnLevelComplete?.Invoke(this, EventArgs.Empty);
+    }
+
+    public string CalculateGrade() {
+        int score = scoreSystem.Score;
+        int grade = 0;
+        string gradeStr;
+
+        switch (score) {
+            case < 1500:
+                grade = 0;
+                break;
+            case < 3000:
+                grade = 1;
+                break;
+            case < 3500:
+                grade = 2;
+                break;
+            case < 4000:
+                grade = 3;
+                break;
+            case < 4500:
+                grade = 4;
+                break;
+            case < 5000:
+                grade = 5;
+                break;
+            case < 5501:
+                grade = 6;
+                break;
+            default:
+                grade = 7;
+                break;
+        }
+
+        float elapsedTime = timer.ElapsedTime;
+        int elapsedMinutes = (int)Mathf.Round(elapsedTime % 60);
+
+        if (elapsedMinutes > 1 && elapsedMinutes < 3) grade--;
+        else if (elapsedTime > 3 && elapsedMinutes < 5) grade -= 2;
+        else grade -= 3;
+
+        switch (grade) {
+            case <1:
+                gradeStr = "F-";
+                break;
+            case 1:
+                gradeStr = "F";
+                break;
+            case 2:
+                gradeStr = "E";
+                break;
+            case 3:
+                gradeStr = "D";
+                break;
+            case 4:
+                gradeStr = "C";
+                break;
+            case 5:
+                gradeStr = "B";
+                break;
+            case 6:
+                gradeStr = "A";
+                break;
+            default:
+                gradeStr = "S!";
+                break;
+        }
+
+        return gradeStr;
     }
 
     public void GameOver() {
