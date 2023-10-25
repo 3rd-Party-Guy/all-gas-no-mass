@@ -16,7 +16,6 @@ public class Timer : MonoBehaviour
     private void Update() {
         if (isTimerOn == false) return;
         ElapsedTime += Time.deltaTime;
-        Debug.Log(ElapsedTime);
     }
 
     private void StopTimer(object e, EventArgs args) => StopTimer();

@@ -13,7 +13,6 @@ public class DifficultyController : MonoBehaviour
     public void ManageDifficulty() => ManageDifficulty(this, EventArgs.Empty);
 
     public void ManageDifficulty(object e, EventArgs data) {
-        Debug.Log("Difficulty Management Initiated...");
         curLevel = GameController.Instance.CompletedLevelsAmount + 1;
         ManageMovement();
         ManageMapSize();
@@ -21,8 +20,6 @@ public class DifficultyController : MonoBehaviour
 
 
     private void ManageMovement() {
-        Debug.Log("Player Movement Management Initiated...");
-
         Movement playerMov = GameController.Instance.PlayerTransform.GetComponent<Movement>();
 
         switch (curLevel) {
@@ -63,8 +60,6 @@ public class DifficultyController : MonoBehaviour
     }
 
     private void ManageMapSize() {
-        Debug.Log("Map Size Management Initiated...");
-
         MapGenerator mapGen = GameController.Instance.MapGen;
         switch (curLevel) {
             case 1:
@@ -84,15 +79,15 @@ public class DifficultyController : MonoBehaviour
                 mapGen.RandomFillPercent = 33;
                 break;
             case 5:
-                mapGen.ChangeSize(500, 500);
+                mapGen.ChangeSize(240, 320);
                 mapGen.RandomFillPercent = 55;
                 break;
             case 6:
-                mapGen.ChangeSize(420, 640);
+                mapGen.ChangeSize(180, 320);
                 mapGen.RandomFillPercent = 55;
                 break;
             case 7:
-                mapGen.ChangeSize(1000, 1000);
+                mapGen.ChangeSize(480, 360);
                 mapGen.RandomFillPercent = 75;
                 break;
             case 8:
