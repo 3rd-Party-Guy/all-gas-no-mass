@@ -80,27 +80,25 @@ public class DifficultyController : MonoBehaviour
                 break;
             case 5:
                 mapGen.ChangeSize(240, 320);
-                mapGen.RandomFillPercent = 55;
+                mapGen.RandomFillPercent = 40;
                 break;
             case 6:
                 mapGen.ChangeSize(180, 320);
-                mapGen.RandomFillPercent = 55;
+                mapGen.RandomFillPercent = 40;
                 break;
             case 7:
                 mapGen.ChangeSize(480, 360);
-                mapGen.RandomFillPercent = 75;
+                mapGen.RandomFillPercent = 45;
                 break;
             case 8:
-                mapGen.ChangeSize(1000, 1000);
-                mapGen.RandomFillPercent = 75;
+                mapGen.ChangeSize(520, 520);
+                mapGen.RandomFillPercent = 48;
                 break;
             case 9:
-                mapGen.ChangeSize(1000, 1000);
                 mapGen.RandomFillPercent = 30;
                 break;
             case 10:
-                mapGen.ChangeSize(1500, 1500);
-                mapGen.RandomFillPercent = 25;
+                mapGen.RandomFillPercent = 50;
                 break;
             default:
                 Debug.LogError("No Difficulty for this Level");
