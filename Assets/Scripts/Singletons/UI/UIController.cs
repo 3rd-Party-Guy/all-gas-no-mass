@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 [RequireComponent(typeof(Timer))]
@@ -14,25 +16,28 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text updateText;
     [SerializeField] TMP_Text timeText;
 
-    [SerializeField] GameObject gameFinishedObject;
+    [SerializeField] GameObject gameFinishedUI;
+    [SerializeField] GameObject pauseUI;
     [SerializeField] TMP_Text finalScoreText;
     [SerializeField] TMP_Text finalTimeText;
     [SerializeField] TMP_Text finalDeathsText;
     [SerializeField] TMP_Text finalGradeText;
 
-
     [Space]
 
-    [Header("Parameters")]
-    [Tooltip("In seconds")]
-    [SerializeField] const float defaultFlashTime = 1f;
+    [Header("Interactability")]
+    [SerializeField] InputAction pauseAction;
+
     Timer timer;
+    const float defaultFlashTime = 1f;
+    bool isPaused;
 
     private void Start() {
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("MainUI"));
         updateText.gameObject.SetActive(false);
 
         timer = GetComponent<Timer>();
+        isPaused = false;
 
         GameController.Instance.ScoreSystem.OnScoreChange += UpdateScoreUI;
         GameController.Instance.OnPlayerDeath  += FlashDeath;
@@ -40,7 +45,9 @@ public class UIController : MonoBehaviour
         GameController.Instance.OnLevelComplete += UpdateLevelScoreUI;
         GameController.Instance.OnGameComplete += OnGameCompleted;
 
-        gameFinishedObject.SetActive(false);
+        gameFinishedUI.SetActive(false);
+
+        pauseAction.started += ctx => Pause();
     }
 
     private void Update() {
@@ -53,8 +60,21 @@ public class UIController : MonoBehaviour
         timeText.text = textStr;
     }
 
+    private void Pause() {
+        if (isPaused) {
+            pauseUI.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        else {
+            pauseUI.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        isPaused = !isPaused;
+    }
+
     private void OnGameCompleted(object e, EventArgs data) {
-        gameFinishedObject.SetActive(true);
+        gameFinishedUI.SetActive(true);
 
         finalScoreText.text += " " + GameController.Instance.ScoreSystem.Score.ToString();
         finalGradeText.text += " " + GameController.Instance.CalculateGrade();
@@ -86,7 +106,7 @@ public class UIController : MonoBehaviour
 
     private void UpdateLevelScoreUI(object e, EventArgs args) {
         int newLevelScore = GameController.Instance.CompletedLevelsAmount;
-        levelsText.text = newLevelScore.ToString();
+        levelsText.text = newLevelScore.ToString() + "/" + GameController.Instance.GoalLevelsAmount;
     }
 
     private void UpdateScoreUI(object e, EventArgs args) {
@@ -106,5 +126,22 @@ public class UIController : MonoBehaviour
         updateText.text = statusText;
         yield return new WaitForSeconds(flashTime);
         updateText.gameObject.SetActive(false);
+    }
+
+    public void PlayAgain() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameController.Instance.gameObject.SetActive(false);
+        GameController.Instance.gameObject.SetActive(true);
+        Destroy(gameFinishedUI.transform.parent.gameObject);
+    }
+
+    public void Exit() => Application.Quit();
+
+    private void OnEnable() {
+        pauseAction.Enable();
+    }
+
+    private void OnDisable() {
+        pauseAction.Disable();
     }
 }

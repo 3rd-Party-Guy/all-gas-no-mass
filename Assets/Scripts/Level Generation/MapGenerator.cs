@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 
     public event EventHandler OnLevelGenerationComplete;
 
-    private void Start() {
+    private void Awake() {
         meshGenerator = GetComponent<MeshGenerator>();
         isFirstWorld = true;
 

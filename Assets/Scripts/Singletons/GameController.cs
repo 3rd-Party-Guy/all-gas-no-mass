@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject playerDeathPrefab;
     [SerializeField] private AudioClip playerDeathSound;
+    [SerializeField] private GameObject goalTracer;
     
     private AudioSource audioSource;
     private GameObject player;
@@ -60,6 +61,7 @@ public class GameController : MonoBehaviour
         playerDeaths = 0;
 
         mapGenerator.CreateNewWorld();
+        goalTracer.SetActive(true);
     }
 
     private void OnGameCompleted(object e, EventArgs data) {
@@ -217,6 +219,10 @@ public class GameController : MonoBehaviour
 
     private void OnDisable() {
         respawnPlayerAction.Disable();
+    }
+
+    public int GoalLevelsAmount {
+        get => levelAmountGoal;
     }
 
     public int CompletedLevelsAmount {
