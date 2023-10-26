@@ -28,13 +28,11 @@ public class MapGenerator : MonoBehaviour
         isFirstWorld = true;
 
         GameController.Instance.OnLevelComplete += CreateNewWorld;
-
-        CreateNewWorld();
     }
 
     private void CreateNewWorld(object e, EventArgs data) => CreateNewWorld();
 
-    private void CreateNewWorld() {
+    public void CreateNewWorld() {
         if (!isFirstWorld)
             meshGenerator.Clear();
             

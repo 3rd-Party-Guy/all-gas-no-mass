@@ -211,6 +211,9 @@ MonoBehaviour:
   levelsText: {fileID: 0}
   updateText: {fileID: 0}
   timeText: {fileID: 0}
+  gameFinishedObject: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  finalGradeText: {fileID: 0}
 --- !u!114 &2460697840998382314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +241,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 7372882589008680066, guid: 43622fefb371e1e48be9335e00ee2dc7, type: 3}
   goalPrefab: {fileID: 8349086528564124078, guid: 669931758d205374e82113b63f5cc0a4, type: 3}
   coinAmount: 25
-  goalAmount: 1
+  goalAmount: 4
 --- !u!114 &6417389474637755485
 MonoBehaviour:
   m_ObjectHideFlags: 0

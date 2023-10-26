@@ -40,6 +40,7 @@ public class GoalTracer : MonoBehaviour
     private void CalculateTracker(GameObject goal) {
         if (goal == null) {
             gameObject.GetComponent<Image>().enabled = false;
+            Debug.LogWarning("No Goal found");
             return;
         }
         Vector3 toPos = goal.transform.position;
