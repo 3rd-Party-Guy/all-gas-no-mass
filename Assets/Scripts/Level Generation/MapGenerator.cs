@@ -29,7 +29,6 @@ public class MapGenerator : MonoBehaviour
 
         GameController.Instance.OnLevelComplete += CreateNewWorld;
 
-
         CreateNewWorld();
     }
 

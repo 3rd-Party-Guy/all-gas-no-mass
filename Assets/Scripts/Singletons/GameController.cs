@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private DifficultyController difficultyController;
 
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject goalTracer;
     [SerializeField] private GameObject playerDeathPrefab;
     [SerializeField] private AudioClip playerDeathSound;
     
@@ -40,8 +41,7 @@ public class GameController : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
             SetupSubsingletons();
-
-            audioSource = GetComponent<AudioSource>();
+            SubsribeEvents();
 
             return;
         }
@@ -61,18 +61,21 @@ public class GameController : MonoBehaviour
 
         levelsCompleted = 0;
         playerDeaths = 0;
-
-        OnGameComplete += OnGameCompleted;
-        mapGenerator.OnLevelGenerationComplete += OnLevelGeneration;
     }
 
     private void OnGameCompleted(object e, EventArgs data) {
 
     }
 
+    private void SubsribeEvents() {
+        OnGameComplete += OnGameCompleted;
+        mapGenerator.OnLevelGenerationComplete += OnLevelGeneration;
+    }
+
     private void OnLevelGeneration(object e, EventArgs data) {
         RespawnPlayer(false);
         difficultyController.ManageDifficulty();
+        goalTracer.SetActive(true);
     }
 
     private void RespawnPlayer(object e, EventArgs data) => RespawnPlayer(false);
@@ -108,6 +111,7 @@ public class GameController : MonoBehaviour
         scoreSystem = GetComponent<ScoreSystem>();
         uiController = GetComponent<UIController>();
         timer = GetComponent<Timer>();
+        audioSource = GetComponent<AudioSource>();
         interactableGenerator = GetComponent<InteractableGenerator>();
         difficultyController = GetComponent<DifficultyController>();
 
