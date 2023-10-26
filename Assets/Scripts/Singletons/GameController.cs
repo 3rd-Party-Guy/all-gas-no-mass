@@ -37,7 +37,6 @@ public class GameController : MonoBehaviour
     private void Awake() {
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
             SetupSubsingletons();
             SubsribeEvents();
 
@@ -78,7 +77,7 @@ public class GameController : MonoBehaviour
     }
 
     private void OnLevelCompleted(object e, EventArgs data) {
-        difficultyController.ManageDifficulty();
+        difficultyController.ManageMapSize();
     }
 
     private void RespawnPlayer(object e, EventArgs data) => RespawnPlayer(false);
@@ -108,6 +107,7 @@ public class GameController : MonoBehaviour
         }
 
         Camera.main.GetComponent<CameraMovement>().Target = player.transform;
+        difficultyController.ManageMovement();
     }
 
     private void SetupSubsingletons() {
@@ -141,25 +141,25 @@ public class GameController : MonoBehaviour
         string gradeStr;
 
         switch (score) {
-            case < 1500:
+            case < 750:
                 grade = 0;
                 break;
-            case < 3000:
+            case < 1000:
                 grade = 1;
                 break;
-            case < 3500:
+            case < 1250:
                 grade = 2;
                 break;
-            case < 4000:
+            case < 1500:
                 grade = 3;
                 break;
-            case < 4500:
+            case < 2250:
                 grade = 4;
                 break;
-            case < 5000:
+            case < 3000:
                 grade = 5;
                 break;
-            case < 5501:
+            case < 4000:
                 grade = 6;
                 break;
             default:
@@ -173,6 +173,9 @@ public class GameController : MonoBehaviour
         if (elapsedMinutes > 1 && elapsedMinutes < 3) grade--;
         else if (elapsedTime > 3 && elapsedMinutes < 5) grade -= 2;
         else grade -= 3;
+
+        if (playerDeaths > 10) grade -= 2;
+        if (playerDeaths > 5) grade--;
 
         switch (grade) {
             case <1:
@@ -234,6 +237,10 @@ public class GameController : MonoBehaviour
 
     public AudioSource AudioPlayer {
         get => audioSource;
+    }
+
+    public Timer Timer {
+        get => timer;
     }
 
     public Transform PlayerTransform {

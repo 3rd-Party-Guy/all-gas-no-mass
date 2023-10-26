@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] GameObject gameFinishedObject;
     [SerializeField] TMP_Text finalScoreText;
+    [SerializeField] TMP_Text finalTimeText;
+    [SerializeField] TMP_Text finalDeathsText;
     [SerializeField] TMP_Text finalGradeText;
 
 
@@ -47,12 +49,8 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        TimeSpan elapsedTime = TimeSpan.FromSeconds(timer.ElapsedTime);
-        
-        if (elapsedTime.TotalMinutes < 1)
-            timeText.text = elapsedTime.ToString(@"ss\:ff");
-        else
-            timeText.text = elapsedTime.ToString(@"mm\:ss\:ff");
+        string textStr = FormatElapsedTimeUI();
+        timeText.text = textStr;
     }
 
     private void OnGameCompleted(object e, EventArgs data) {
@@ -60,6 +58,20 @@ public class UIController : MonoBehaviour
 
         finalScoreText.text += " " + GameController.Instance.ScoreSystem.Score.ToString();
         finalGradeText.text += " " + GameController.Instance.CalculateGrade();
+        finalTimeText.text += " " + FormatElapsedTimeUI();
+        finalDeathsText.text += " " + GameController.Instance.PlayerDeaths;
+    }
+
+    public string FormatElapsedTimeUI() {
+        TimeSpan elapsedTime = TimeSpan.FromSeconds(timer.ElapsedTime);
+        string textString;
+
+        if (elapsedTime.TotalMinutes < 1)
+            textString = elapsedTime.ToString(@"ss\:ff");
+        else
+            textString = elapsedTime.ToString(@"mm\:ss\:ff");
+
+        return textString;
     }
 
     public void FlashMessage(string msg) => StartCoroutine(FlashStatusChange(msg));

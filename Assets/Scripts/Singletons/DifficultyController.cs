@@ -10,57 +10,37 @@ public class DifficultyController : MonoBehaviour
         curLevel = 1;
     }
 
-    public void ManageDifficulty() => ManageDifficulty(this, EventArgs.Empty);
-
-    public void ManageDifficulty(object e, EventArgs data) {
+    public void ManageMovement() {
         curLevel = GameController.Instance.CompletedLevelsAmount + 1;
-        ManageMovement();
-        ManageMapSize();
-    }
-
-
-    private void ManageMovement() {
         Movement playerMov = GameController.Instance.PlayerTransform.GetComponent<Movement>();
 
         switch (curLevel) {
             case 1:
-                playerMov.ChangeMovementDifficulty(650f, 600f, 1);
+                playerMov.ChangeMovementDifficulty(650f, 800f, 1);
                 break;
             case 2:
-                playerMov.ChangeMovementDifficulty(650f, 600f, 0.7f);
+                playerMov.ChangeMovementDifficulty(850f, 900f, 0.5f);
                 break;
             case 3:
-                playerMov.ChangeMovementDifficulty(725f, 650f, 0.7f);
+                playerMov.ChangeMovementDifficulty(900f, 1000f, 0.3f);
                 break;
             case 4:
-                playerMov.ChangeMovementDifficulty(750f, 650f, 0.7f);
+                playerMov.ChangeMovementDifficulty(900f, 1100f, 0.3f);
                 break;
             case 5:
-                playerMov.ChangeMovementDifficulty(1000f, 900f, 0.5f);
+                playerMov.ChangeMovementDifficulty(1100f, 1200f, 0.25f);
                 break;
-            case 6:
-                playerMov.ChangeMovementDifficulty(1000f, 100f, 0.5f);
-                break;
-            case 7:
-                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.4f);
-                break;
-            case 8:
-                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.3f);
-                break;
-            case 9:
-                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.2f);
-                break;
-            case 10:
-                playerMov.ChangeMovementDifficulty(1250f, 1250f, 0.15f);
-                break;
+
             default:
                 Debug.LogError("No Difficulty for this Level");
                 break;
         }
     }
 
-    private void ManageMapSize() {
+    public void ManageMapSize() {
+        curLevel = GameController.Instance.CompletedLevelsAmount + 1;
         MapGenerator mapGen = GameController.Instance.MapGen;
+
         switch (curLevel) {
             case 1:
                 mapGen.ChangeSize(360, 120);
@@ -79,26 +59,8 @@ public class DifficultyController : MonoBehaviour
                 mapGen.RandomFillPercent = 33;
                 break;
             case 5:
-                mapGen.ChangeSize(240, 320);
+                mapGen.ChangeSize(500, 500);
                 mapGen.RandomFillPercent = 40;
-                break;
-            case 6:
-                mapGen.ChangeSize(320, 320);
-                mapGen.RandomFillPercent = 40;
-                break;
-            case 7:
-                mapGen.ChangeSize(480, 360);
-                mapGen.RandomFillPercent = 45;
-                break;
-            case 8:
-                mapGen.ChangeSize(480, 480);
-                mapGen.RandomFillPercent = 48;
-                break;
-            case 9:
-                mapGen.RandomFillPercent = 30;
-                break;
-            case 10:
-                mapGen.RandomFillPercent = 50;
                 break;
             default:
                 Debug.LogError("No Difficulty for this Level");
