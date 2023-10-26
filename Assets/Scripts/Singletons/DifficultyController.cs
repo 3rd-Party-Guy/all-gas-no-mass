@@ -36,22 +36,22 @@ public class DifficultyController : MonoBehaviour
                 playerMov.ChangeMovementDifficulty(750f, 650f, 0.7f);
                 break;
             case 5:
-                playerMov.ChangeMovementDifficulty(750f, 700f, 0.7f);
+                playerMov.ChangeMovementDifficulty(1000f, 900f, 0.5f);
                 break;
             case 6:
-                playerMov.ChangeMovementDifficulty(750f, 700f, 0.5f);
+                playerMov.ChangeMovementDifficulty(1000f, 100f, 0.5f);
                 break;
             case 7:
-                playerMov.ChangeMovementDifficulty(750f, 750f, 0.4f);
+                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.4f);
                 break;
             case 8:
-                playerMov.ChangeMovementDifficulty(800f, 800f, 0.3f);
+                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.3f);
                 break;
             case 9:
-                playerMov.ChangeMovementDifficulty(900f, 900f, 0.2f);
+                playerMov.ChangeMovementDifficulty(1200f, 1200f, 0.2f);
                 break;
             case 10:
-                playerMov.ChangeMovementDifficulty(1000f, 1000f, 0.15f);
+                playerMov.ChangeMovementDifficulty(1250f, 1250f, 0.15f);
                 break;
             default:
                 Debug.LogError("No Difficulty for this Level");
@@ -83,7 +83,7 @@ public class DifficultyController : MonoBehaviour
                 mapGen.RandomFillPercent = 40;
                 break;
             case 6:
-                mapGen.ChangeSize(180, 320);
+                mapGen.ChangeSize(320, 320);
                 mapGen.RandomFillPercent = 40;
                 break;
             case 7:
@@ -91,7 +91,7 @@ public class DifficultyController : MonoBehaviour
                 mapGen.RandomFillPercent = 45;
                 break;
             case 8:
-                mapGen.ChangeSize(520, 520);
+                mapGen.ChangeSize(480, 480);
                 mapGen.RandomFillPercent = 48;
                 break;
             case 9:

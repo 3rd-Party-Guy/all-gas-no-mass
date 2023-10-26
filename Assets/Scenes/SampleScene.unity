@@ -2379,10 +2379,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 8502044384457041306, guid: 9b6fad30bba89844ba0144bc25302409, type: 3}
-      propertyPath: movementOffsetMultiplier
-      value: 17
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

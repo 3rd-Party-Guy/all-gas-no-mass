@@ -44,9 +44,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Planets
+    uniqueID: 2889128775
+    locked: 0
   - name: Particles
     uniqueID: 3001247279
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Player
+    uniqueID: 3692294297
     locked: 0
