@@ -149,6 +149,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 780850394747093722, guid: 014b36ceee771254abbe469b107f2d87, type: 3}
   playerDeathPrefab: {fileID: 6441378892987144841, guid: 212e0ef56b5b648498496a937ef1da16, type: 3}
   playerDeathSound: {fileID: 8300000, guid: 89310de8d17452d4987301931af330d5, type: 3}
+  goalTracer: {fileID: 0}
   levelAmountGoal: 5
   respawnPlayerAction:
     m_Name: Respawn Player
@@ -211,9 +212,30 @@ MonoBehaviour:
   levelsText: {fileID: 0}
   updateText: {fileID: 0}
   timeText: {fileID: 0}
-  gameFinishedObject: {fileID: 0}
+  gameFinishedUI: {fileID: 0}
+  pauseUI: {fileID: 0}
   finalScoreText: {fileID: 0}
+  finalTimeText: {fileID: 0}
+  finalDeathsText: {fileID: 0}
   finalGradeText: {fileID: 0}
+  timeCharWidth: 0.45
+  pauseAction:
+    m_Name: Pause
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: b8908bd7-1c5f-4d7b-80d4-0584f4fe0a1e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 21adc3e7-226e-4408-b469-bc52dfc35ae2
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pause
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &2460697840998382314
 MonoBehaviour:
   m_ObjectHideFlags: 0

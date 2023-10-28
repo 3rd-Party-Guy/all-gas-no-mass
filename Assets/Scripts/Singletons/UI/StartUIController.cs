@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class StartUIController : MonoBehaviour
 {
     public void StartGame() {
+        Cursor.visible = false;
+
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneIndex + 1);
     }

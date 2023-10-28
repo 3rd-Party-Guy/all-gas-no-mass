@@ -23,6 +23,9 @@ public class UIController : MonoBehaviour
     [SerializeField] TMP_Text finalDeathsText;
     [SerializeField] TMP_Text finalGradeText;
 
+    [Header("UI Preferences")]
+    [SerializeField] float timeCharWidth;
+
     [Space]
 
     [Header("Interactability")]
@@ -57,7 +60,7 @@ public class UIController : MonoBehaviour
         }
 
         string textStr = FormatElapsedTimeUI();
-        timeText.text = textStr;
+        timeText.SetText($"<mspace={timeCharWidth}em>{textStr}");
     }
 
     private void Pause() {
@@ -71,10 +74,12 @@ public class UIController : MonoBehaviour
         }
 
         isPaused = !isPaused;
+        Cursor.visible = isPaused;
     }
 
     private void OnGameCompleted(object e, EventArgs data) {
         gameFinishedUI.SetActive(true);
+        Cursor.visible = true;
 
         finalScoreText.text += " " + GameController.Instance.ScoreSystem.Score.ToString();
         finalGradeText.text += " " + GameController.Instance.CalculateGrade();
@@ -129,6 +134,7 @@ public class UIController : MonoBehaviour
     }
 
     public void PlayAgain() {
+        Cursor.visible = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameController.Instance.gameObject.SetActive(false);
         GameController.Instance.gameObject.SetActive(true);
